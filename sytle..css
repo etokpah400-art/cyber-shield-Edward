@@ -1,0 +1,152 @@
+/* =========================================================
+   1. AMBIENT BACKGROUND NEBULA ORBS & RADIAL BACKLIGHT
+   ========================================================= */
+.ambient-orb {
+  position: absolute;
+  border-radius: 9999px;
+  filter: blur(110px);
+  opacity: 0.28;
+  transition: background-color 0.8s ease, transform 6s ease-in-out;
+  animation: floatOrb 14s infinite alternate ease-in-out;
+}
+
+.orb-cyan {
+  width: 520px;
+  height: 520px;
+  background: radial-gradient(circle, #00f0ff 0%, transparent 70%);
+  top: -120px;
+  left: -100px;
+}
+
+.orb-violet {
+  width: 600px;
+  height: 600px;
+  background: radial-gradient(circle, #8b5cf6 0%, transparent 70%);
+  top: 25%;
+  right: -180px;
+  animation-delay: -5s;
+}
+
+.orb-emerald {
+  width: 480px;
+  height: 480px;
+  background: radial-gradient(circle, #00ff9d 0%, transparent 70%);
+  bottom: -120px;
+  left: 25%;
+  animation-delay: -9s;
+}
+
+@keyframes floatOrb {
+  0% { transform: translate(0px, 0px) scale(1); }
+  100% { transform: translate(40px, -35px) scale(1.12); }
+}
+
+/* Radial glow directly behind the 3D Three.js Shield */
+.radial-core-glow {
+  background: radial-gradient(circle at 50% 50%, rgba(0, 240, 255, 0.22) 0%, rgba(139, 92, 246, 0.08) 45%, transparent 75%);
+}
+
+/* =========================================================
+   2. 3D PERSPECTIVE CYBER GRID & FLAT MATRIX OVERLAY
+   ========================================================= */
+.cyber-grid-flat {
+  position: absolute;
+  inset: 0;
+  background-size: 42px 42px;
+  background-image: 
+    linear-gradient(to right, rgba(0, 240, 255, 0.07) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(0, 240, 255, 0.07) 1px, transparent 1px);
+  -webkit-mask-image: radial-gradient(circle at 50% 35%, black 35%, transparent 90%);
+  mask-image: radial-gradient(circle at 50% 35%, black 35%, transparent 90%);
+}
+
+.cyber-grid-perspective {
+  position: absolute;
+  inset: -40%;
+  background-size: 64px 64px;
+  background-image:
+    linear-gradient(to right, rgba(0, 240, 255, 0.12) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(0, 240, 255, 0.12) 1px, transparent 1px);
+  transform: perspective(550px) rotateX(68deg) translateY(180px) translateZ(-120px);
+  animation: gridScroll 12s linear infinite;
+  -webkit-mask-image: radial-gradient(ellipse at 50% 50%, rgba(0,0,0,0.65) 10%, transparent 70%);
+  mask-image: radial-gradient(ellipse at 50% 50%, rgba(0,0,0,0.65) 10%, transparent 70%);
+}
+
+@keyframes gridScroll {
+  0% { background-position: 0 0; }
+  100% { background-position: 0 64px; }
+}
+
+/* =========================================================
+   3. CRT SCANLINES, VIGNETTE & HUD BRACKETS
+   ========================================================= */
+.crt-scanlines {
+  position: absolute;
+  inset: 0;
+  background: repeating-linear-gradient(
+    to bottom,
+    transparent 0px,
+    transparent 2px,
+    rgba(0, 240, 255, 0.025) 3px,
+    rgba(0, 0, 0, 0.18) 4px
+  );
+  pointer-events: none;
+}
+
+.vignette-overlay {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at center, transparent 55%, rgba(2, 4, 10, 0.85) 100%);
+  pointer-events: none;
+}
+
+.hud-bracket {
+  position: absolute;
+  width: 18px;
+  height: 18px;
+  border-color: rgba(0, 240, 255, 0.6);
+  pointer-events: none;
+  z-index: 20;
+}
+
+/* =========================================================
+   4. GLASSMORPHISM, 3D TILT CARDS & SCROLLBAR
+   ========================================================= */
+.glass-panel {
+  background: rgba(11, 18, 34, 0.72);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.5), inset 0 1px 0 0 rgba(255, 255, 255, 0.06);
+}
+
+.shield-mode-btn.active-mode {
+  box-shadow: 0 0 20px rgba(0, 240, 255, 0.28);
+}
+
+.tilt-card {
+  transform-style: preserve-3d;
+  will-change: transform;
+  transition: transform 0.18s ease-out, border-color 0.25s ease, box-shadow 0.25s ease;
+}
+
+.tilt-card:hover {
+  box-shadow: 0 0 28px rgba(0, 240, 255, 0.15);
+}
+
+.custom-scrollbar::-webkit-scrollbar {
+  width: 5px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-track {
+  background: rgba(15, 23, 42, 0.6);
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb {
+  background: rgba(0, 240, 255, 0.35);
+  border-radius: 9999px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb:hover {
+  background: rgba(0, 240, 255, 0.7);
+}
